@@ -18,6 +18,7 @@
         "johnvandeweghe/php-api-library-core": "^1.0@alpha"
     },
     "autoload": {
-        "psr-4": {"PHPAPILibrary\\Http\\": "src/"}
+        "psr-4": {"PHPAPILibrary\\Http\\": "src/"},
+        "files": ["src/functions.php"]
     }
 }
