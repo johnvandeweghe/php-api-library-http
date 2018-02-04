@@ -23,4 +23,6 @@ abstract class AbstractRequestTranslator extends \PHPAPILibrary\Core\Network\In\
      */
     abstract protected function getContentTypeDataTranslator(): ContentTypeDataTranslator;
 
+
+    //TODO: Add headers into translated request somehow??
 }
