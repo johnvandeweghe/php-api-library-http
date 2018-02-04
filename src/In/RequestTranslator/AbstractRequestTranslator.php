@@ -10,11 +10,17 @@ use PHPAPILibrary\Http\In\RequestTranslator\DataTranslator\ContentTypeDataTransl
  */
 abstract class AbstractRequestTranslator extends \PHPAPILibrary\Core\Network\In\RequestTranslator\AbstractRequestTranslator
 {
+    /**
+     * @return DataTranslatorInterface
+     */
     protected function getDataTranslator(): DataTranslatorInterface
     {
         return $this->getContentTypeDataTranslator();
     }
 
+    /**
+     * @return ContentTypeDataTranslator
+     */
     abstract protected function getContentTypeDataTranslator(): ContentTypeDataTranslator;
 
 }
