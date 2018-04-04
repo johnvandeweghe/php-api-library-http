@@ -25,13 +25,13 @@ abstract class AbstractResponseTranslator extends \PHPAPILibrary\Core\Network\In
 
     /**
      * @param StreamInterface $data
-     * @param \PHPAPILibrary\Core\Identity\ResponseInterface $response
+     * @param \PHPAPILibrary\Core\Data\ResponseInterface $response
      * @return ResponseInterface
      * @throws UnableToTranslateResponseException
      */
     protected function buildResponse(
         StreamInterface $data,
-        \PHPAPILibrary\Core\Identity\ResponseInterface $response
+        \PHPAPILibrary\Core\Data\ResponseInterface $response
     ): ResponseInterface {
         //TODO: Figure out how to be told what status to return??
         return new HttpResponse(new Response(200, [], $data));

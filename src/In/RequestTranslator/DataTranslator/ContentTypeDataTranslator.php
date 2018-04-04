@@ -1,6 +1,7 @@
 <?php
 namespace PHPAPILibrary\Http\In\RequestTranslator\DataTranslator;
 
+use PHPAPILibrary\Core\Data\DataInterface;
 use PHPAPILibrary\Core\Network\Response\Response;
 use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateRequestException;
 use PHPAPILibrary\Core\Network\In\RequestTranslator\DataTranslatorInterface;
@@ -38,10 +39,10 @@ class ContentTypeDataTranslator implements DataTranslatorInterface
 
     /**
      * @param RequestInterface $request
-     * @return object|array|null
+     * @return DataInterface
      * @throws UnableToTranslateRequestException
      */
-    public function translateData(RequestInterface $request)
+    public function translateData(RequestInterface $request): DataInterface
     {
         if(!($request instanceof HttpRequest)){
             throw new UnableToTranslateRequestException(

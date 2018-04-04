@@ -1,6 +1,7 @@
 <?php
 namespace PHPAPILibrary\Http\In\RequestTranslator\DataTranslator;
 
+use PHPAPILibrary\Core\Data\DataInterface;
 use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateRequestException;
 use PHPAPILibrary\Core\Network\In\RequestTranslator\DataTranslatorInterface;
 use PHPAPILibrary\Core\Network\RequestInterface;
@@ -50,7 +51,8 @@ class JsonDataTranslator implements DataTranslatorInterface
 
     /**
      * @param RequestInterface $request
-     * @return mixed the value encoded in <i>json</i> in appropriate
+     * @return DataInterface
+     * mixed the value encoded in <i>json</i> in appropriate
      * PHP type. Values true, false and
      * null (case-insensitive) are returned as <b>TRUE</b>, <b>FALSE</b>
      * and <b>NULL</b> respectively. <b>NULL</b> is returned if the
@@ -58,7 +60,7 @@ class JsonDataTranslator implements DataTranslatorInterface
      * data is deeper than the recursion limit.
      * @throws UnableToTranslateRequestException
      */
-    public function translateData(RequestInterface $request)
+    public function translateData(RequestInterface $request): DataInterface
     {
         try {
             return \GuzzleHttp\json_decode($request->getData()->getContents(), $this->associative, $this->depth, $this->options);

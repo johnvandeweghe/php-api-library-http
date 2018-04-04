@@ -16,7 +16,7 @@ use PHPAPILibrary\Http\HttpResponse;
  * Class AbstractLayerController
  * @package PHPAPILibrary\Http\Out
  */
-abstract class AbstractLayerController extends \PHPAPILibrary\Core\Network\AbstractLayerController
+abstract class AbstractLayerController extends \PHPAPILibrary\Http\AbstractLayerController
 {
 
     /**
