@@ -1,18 +1,16 @@
 <?php
 namespace PHPAPILibrary\Http\In\RequestTranslator\DataTranslator;
 
-use PHPAPILibrary\Core\Data\DataInterface;
 use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateRequestException;
-use PHPAPILibrary\Core\Network\In\RequestTranslator\DataTranslatorInterface;
-use PHPAPILibrary\Core\Network\RequestInterface;
-use PHPAPILibrary\Core\Network\Response\Response;
+use PHPAPILibrary\Http\HttpResponse;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * A Data Translator adapter for the PHP json_decode method.
  * Class JsonDataTranslator
  * @package PHPAPILibrary\Http\In\RequestTranslator\DataTranslator
  */
-class JsonDataTranslator implements DataTranslatorInterface
+class JsonDataTranslator extends AbstractDataTranslator
 {
     /**
      * @var bool
@@ -50,9 +48,8 @@ class JsonDataTranslator implements DataTranslatorInterface
     }
 
     /**
-     * @param RequestInterface $request
-     * @return DataInterface
-     * mixed the value encoded in <i>json</i> in appropriate
+     * @param StreamInterface $stream
+     * @return mixed the value encoded in <i>json</i> in appropriate
      * PHP type. Values true, false and
      * null (case-insensitive) are returned as <b>TRUE</b>, <b>FALSE</b>
      * and <b>NULL</b> respectively. <b>NULL</b> is returned if the
@@ -60,12 +57,12 @@ class JsonDataTranslator implements DataTranslatorInterface
      * data is deeper than the recursion limit.
      * @throws UnableToTranslateRequestException
      */
-    public function translateData(RequestInterface $request): DataInterface
+    protected function translateRequestBody(StreamInterface $stream)
     {
         try {
-            return \GuzzleHttp\json_decode($request->getData()->getContents(), $this->associative, $this->depth, $this->options);
+            return \GuzzleHttp\json_decode($stream->getContents(), $this->associative, $this->depth, $this->options);
         } catch (\InvalidArgumentException $exception) {
-            throw new UnableToTranslateRequestException(Response::getNullResponse(), $exception->getMessage(), $exception->getCode(), $exception);
+            throw new UnableToTranslateRequestException(new HttpResponse(new \GuzzleHttp\Psr7\Response(400)), $exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }

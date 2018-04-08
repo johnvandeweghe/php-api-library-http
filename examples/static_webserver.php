@@ -14,7 +14,7 @@ $router->addRoute("/", new ExampleLambdaController(function(RequestInterface $re
     return new \PHPAPILibrary\Http\HttpResponse(new \GuzzleHttp\Psr7\Response(200, [], "<html></html>"));
 }));
 
-$lc = new \PHPAPILibrary\Http\In\RoutingLayerController(
+$lc = new \PHPAPILibrary\Http\RoutingLayerController(
     $router,
     new \PHPAPILibrary\Core\Network\AccessController\AllowAllAccessController(),
     new \PHPAPILibrary\Core\Network\CacheController\NullCacheController(),
