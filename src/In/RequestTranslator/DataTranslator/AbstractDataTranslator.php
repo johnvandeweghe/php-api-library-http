@@ -9,6 +9,7 @@ use PHPAPILibrary\Core\Network\RequestInterface;
 use PHPAPILibrary\Http\Data\RequestData;
 use PHPAPILibrary\Http\HttpRequest;
 use PHPAPILibrary\Http\HttpResponse;
+use PHPAPILibrary\Http\RequestDataInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -28,11 +29,11 @@ abstract class AbstractDataTranslator implements DataTranslatorInterface
         if(!($request instanceof HttpRequest)){
             throw new UnableToTranslateRequestException(
                 new HttpResponse(new \GuzzleHttp\Psr7\Response(400)),
-                "A ContentTypeDataTranslator can only translate HTTPRequests."
+                "A DataTranslator can only translate HTTPRequests."
             );
         }
 
-        return new RequestData($this->buildServerRequest($request));
+        return $this->buildRequestData($this->buildServerRequest($request));
     }
 
     /**
@@ -53,6 +54,15 @@ abstract class AbstractDataTranslator implements DataTranslatorInterface
         );
 
         return $serverRequest->withParsedBody($this->translateRequestBody($request->getData()));
+    }
+
+    /**
+     * @param ServerRequestInterface $serverRequest
+     * @return RequestDataInterface
+     */
+    protected function buildRequestData(ServerRequestInterface $serverRequest): RequestDataInterface
+    {
+        return new RequestData($serverRequest);
     }
 
     /**

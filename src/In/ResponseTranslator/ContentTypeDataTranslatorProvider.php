@@ -1,11 +1,11 @@
 <?php
-namespace PHPAPILibrary\Http\In\RequestTranslator;
+namespace PHPAPILibrary\Http\In\ResponseTranslator;
 
 use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateRequestException;
-use PHPAPILibrary\Core\Network\In\RequestTranslator\DataTranslatorInterface;
-use PHPAPILibrary\Http\HttpRequest;
-use PHPAPILibrary\Http\In\RequestTranslator\DataTranslator\JsonDataTranslator;
-use PHPAPILibrary\Http\In\RequestTranslator\DataTranslator\UrlEncodedDataTranslator;
+use PHPAPILibrary\Core\Network\In\ResponseTranslator\DataTranslatorInterface;
+use PHPAPILibrary\Http\Data\Response;
+use PHPAPILibrary\Http\In\ResponseTranslator\DataTranslator\JsonDataTranslator;
+use PHPAPILibrary\Http\In\ResponseTranslator\DataTranslator\UrlEncodedDataTranslator;
 
 /**
  * Class ContentTypeDataTranslatorProvider
@@ -48,13 +48,15 @@ class ContentTypeDataTranslatorProvider
     }
 
     /**
-     * @param HttpRequest $request
+     * @param Response $response
      * @return DataTranslatorInterface
      * @throws UnableToTranslateRequestException
      */
-    public function getDataTranslator(HttpRequest $request): DataTranslatorInterface
+    public function getDataTranslator(Response $response): DataTranslatorInterface
     {
-        return $this->getTranslatorByContentTypeHeader($request->getRequest()->getHeaderLine("Content-type") ?: null);
+        //Create a fake response so we can use the header line parser from psr7
+        $psrResponse = new \GuzzleHttp\Psr7\Response(200, $response->getHttpData()->getHeaders());
+        return $this->getTranslatorByContentTypeHeader($psrResponse->getHeaderLine("Content-type") ?: null);
     }
 
     /**

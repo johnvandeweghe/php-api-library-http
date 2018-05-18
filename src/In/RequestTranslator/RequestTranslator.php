@@ -4,7 +4,6 @@ namespace PHPAPILibrary\Http\In\RequestTranslator;
 use PHPAPILibrary\Core\Network\In\RequestTranslator\IdentityProvider\NullIdentityProvider;
 use PHPAPILibrary\Core\Network\In\RequestTranslator\IdentityProviderInterface;
 use PHPAPILibrary\Core\Network\RequestInterface;
-use PHPAPILibrary\Http\In\ContentTypeDataTranslatorProvider;
 
 class RequestTranslator extends AbstractRequestTranslator
 {

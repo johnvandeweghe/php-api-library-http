@@ -1,7 +1,7 @@
 <?php
 namespace PHPAPILibrary\Http;
 
-interface DataInterface extends \PHPAPILibrary\Core\Data\DataInterface
+interface ResponseDataInterface extends \PHPAPILibrary\Core\Data\DataInterface
 {
     /**
      * Get data parsed from an HTTP request.
@@ -10,10 +10,10 @@ interface DataInterface extends \PHPAPILibrary\Core\Data\DataInterface
     public function getData();
 
     /**
-     * Get associative array of url parameters.
-     * @return string[]
+     * HTTP Status code this response represents
+     * @return int
      */
-    public function getQueryParameters(): array;
+    public function getStatusCode(): int;
 
     /**
      * Get header lines.

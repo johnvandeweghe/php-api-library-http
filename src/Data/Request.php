@@ -20,7 +20,7 @@ class Request implements RequestInterface
      */
     private $identity;
     /**
-     * @var DataInterface
+     * @var RequestData
      */
     private $data;
 
@@ -29,13 +29,13 @@ class Request implements RequestInterface
      * @param String $verb
      * @param String $path
      * @param null|IdentityInterface $identity
-     * @param DataInterface $data
+     * @param RequestData $data
      */
     public function __construct(
         String $verb,
         String $path,
         ?IdentityInterface $identity,
-        DataInterface $data
+        RequestData $data
     )
     {
         $this->verb = $verb;
@@ -72,6 +72,11 @@ class Request implements RequestInterface
      * @return DataInterface
      */
     public function getData(): DataInterface
+    {
+        return $this->data;
+    }
+
+    public function getHttpData(): RequestData
     {
         return $this->data;
     }

@@ -36,6 +36,15 @@ class HttpResponse implements \PHPAPILibrary\Core\Network\ResponseInterface
     }
 
     /**
+     * Get header lines.
+     * @return string[][]
+     */
+    public function getHeaders(): array
+    {
+        return $this->response->getHeaders();
+    }
+
+    /**
      * @return ResponseInterface
      */
     public function getResponse(): ResponseInterface

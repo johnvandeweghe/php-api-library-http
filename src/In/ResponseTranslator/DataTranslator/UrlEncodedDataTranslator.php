@@ -2,9 +2,6 @@
 namespace PHPAPILibrary\Http\In\ResponseTranslator\DataTranslator;
 
 use function GuzzleHttp\Psr7\stream_for;
-use PHPAPILibrary\Core\Identity\ResponseInterface;
-use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateResponseException;
-use PHPAPILibrary\Core\Network\In\ResponseTranslator\DataTranslatorInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -13,16 +10,15 @@ use Psr\Http\Message\StreamInterface;
  * Class UrlEncodedDataTranslator
  * @package PHPAPILibrary\Http\In\ResponseTranslator\DataTranslator
  */
-class UrlEncodedDataTranslator implements DataTranslatorInterface
+class UrlEncodedDataTranslator extends AbstractDataTranslator
 {
-
     /**
-     * @param ResponseInterface $response
+     * @param mixed $responseData
      * @return StreamInterface
-     * @throws UnableToTranslateResponseException
+     * @throws \PHPAPILibrary\Http\In\ResponseTranslator\Exception\UnableToTranslateResponseException
      */
-    public function translateData(ResponseInterface $response): StreamInterface
+    protected function translateRequestBody($responseData): StreamInterface
     {
-        return stream_for(http_build_query($response->getData()));
+        return stream_for(http_build_query($responseData));
     }
 }

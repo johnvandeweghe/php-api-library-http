@@ -1,14 +1,14 @@
 <?php
 namespace PHPAPILibrary\Http\Data;
 
-use PHPAPILibrary\Http\DataInterface;
+use PHPAPILibrary\Http\RequestDataInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Class RequestData
  * @package PHPAPILibrary\Http\Data
  */
-class RequestData implements DataInterface
+class RequestData implements RequestDataInterface
 {
     /**
      * @var ServerRequestInterface
@@ -59,4 +59,5 @@ class RequestData implements DataInterface
     {
         return $this->request->getCookieParams();
     }
+
 }

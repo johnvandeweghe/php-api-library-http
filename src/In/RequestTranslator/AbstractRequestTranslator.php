@@ -9,7 +9,6 @@ use PHPAPILibrary\Core\Network\RequestInterface;
 use PHPAPILibrary\Http\Data\Request;
 use PHPAPILibrary\Http\HttpRequest;
 use PHPAPILibrary\Http\HttpResponse;
-use PHPAPILibrary\Http\In\ContentTypeDataTranslatorProvider;
 
 /**
  * Class AbstractContentTypeRequestTranslator

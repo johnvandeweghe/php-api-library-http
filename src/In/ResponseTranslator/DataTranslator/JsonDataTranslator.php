@@ -2,10 +2,8 @@
 namespace PHPAPILibrary\Http\In\ResponseTranslator\DataTranslator;
 
 use function GuzzleHttp\Psr7\stream_for;
-use PHPAPILibrary\Core\Identity\ResponseInterface;
-use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateRequestException;
-use PHPAPILibrary\Core\Network\In\ResponseTranslator\DataTranslatorInterface;
-use PHPAPILibrary\Core\Network\Response\Response;
+use PHPAPILibrary\Http\HttpResponse;
+use PHPAPILibrary\Http\In\ResponseTranslator\Exception\UnableToTranslateResponseException;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -13,7 +11,7 @@ use Psr\Http\Message\StreamInterface;
  * Class JsonDataTranslator
  * @package PHPAPILibrary\Http\In\ResponseTranslator\DataTranslator
  */
-class JsonDataTranslator implements DataTranslatorInterface
+class JsonDataTranslator extends AbstractDataTranslator
 {
     /**
      * @var int
@@ -36,16 +34,21 @@ class JsonDataTranslator implements DataTranslatorInterface
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param mixed $responseData
      * @return StreamInterface
-     * @throws UnableToTranslateRequestException
+     * @throws UnableToTranslateResponseException
      */
-    public function translateData(ResponseInterface $response): StreamInterface
+    protected function translateRequestBody($responseData): StreamInterface
     {
         try {
-            return stream_for(\GuzzleHttp\json_encode($response->getData(), $this->options, $this->depth));
+            return stream_for(\GuzzleHttp\json_encode($responseData, $this->options, $this->depth));
         } catch (\InvalidArgumentException $exception) {
-            throw new UnableToTranslateRequestException(Response::getNullResponse(), $exception->getMessage(), $exception->getCode(), $exception);
+            throw new UnableToTranslateResponseException(
+                new HttpResponse(new \GuzzleHttp\Psr7\Response(400)),
+                $exception->getMessage(),
+                $exception->getCode(),
+                $exception
+            );
         }
     }
 }

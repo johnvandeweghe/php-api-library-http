@@ -15,7 +15,8 @@
     "require": {
         "php": "^7.1",
         "guzzlehttp/guzzle": "^6.3",
-        "johnvandeweghe/php-api-library-core": "^1.0@alpha"
+        "johnvandeweghe/php-api-library-core": "^1.0@alpha",
+        "hansott/psr7-cookies": "^2.0"
     },
     "autoload": {
         "psr-4": {"PHPAPILibrary\\Http\\": "src/"},
