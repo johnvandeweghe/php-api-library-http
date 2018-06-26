@@ -3,27 +3,25 @@
 require_once "../vendor/autoload.php";
 require_once "ExampleLambdaDataController.php";
 
-$request = new \PHPAPILibrary\Http\HttpRequest(\GuzzleHttp\Psr7\ServerRequest::fromGlobals());
+$router = new \PHPAPILibrary\Core\Network\Router\RegisteredPathRouter();
 
-$router = new \PHPAPILibrary\Core\Network\RegisteredPathRouter();
-
-$router->addRoute("/", new \PHPAPILibrary\Http\In\LayerController(
-    new ExampleLambdaDataController(
-        function(\PHPAPILibrary\Http\Data\Request $request): \PHPAPILibrary\Http\Data\Response {
-            return new \PHPAPILibrary\Http\Data\Response(
-                new \PHPAPILibrary\Http\Data\ResponseData(
-                    200,
-                    [
-                        "pong" => $request->getHttpData()->getData()["ping"] ?? null
-                    ],
-                    ["Content-Type" => ["application/json"]]
-                )
-            );
-        }
-    )
+$router->addRoute("/", ExampleLambdaDataController::wrapInDefaultLayerController(
+   function(\PHPAPILibrary\Http\Data\Request $request): \PHPAPILibrary\Http\Data\Response {
+        return new \PHPAPILibrary\Http\Data\Response(
+            new \PHPAPILibrary\Http\Data\ResponseData(
+                200,
+                [
+                    "pong" => $request->getHttpData()->getData()["ping"] ?? null
+                ],
+                ["Content-Type" => ["application/json"]]
+            )
+        );
+    }
 ));
 
 $lc = new \PHPAPILibrary\Http\RoutingLayerController($router);
+
+$request = new \PHPAPILibrary\Http\HttpRequest(\GuzzleHttp\Psr7\ServerRequest::fromGlobals());
 
 /**
  * @var \PHPAPILibrary\Http\HttpResponse $response

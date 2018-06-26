@@ -75,4 +75,39 @@ class ResponseData implements ResponseDataInterface
     {
         return $this->cookies;
     }
+
+    /**
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return \serialize([
+            $this->getStatusCode(),
+            $this->getData(),
+            $this->getHeaders(),
+            $this->getCookies()
+        ]);
+    }
+
+    /**
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+       list(
+           $this->statusCode,
+           $this->data,
+           $this->headers,
+           $this->cookies
+       ) = \unserialize($serialized);
+    }
 }

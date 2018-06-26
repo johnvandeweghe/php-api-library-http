@@ -2,7 +2,6 @@
 namespace PHPAPILibrary\Http\Out;
 
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\TransferException;
 use PHPAPILibrary\Core\Network\Exception\RequestException;
 use PHPAPILibrary\Core\Network\Exception\UnableToProcessRequestException;
 use PHPAPILibrary\Core\Network\RequestInterface;
@@ -40,12 +39,12 @@ abstract class AbstractLayerController extends \PHPAPILibrary\Http\AbstractLayer
             ]);
 
             return new HttpResponse($response);
-        } catch (TransferException $transferException) {
+        } catch (\GuzzleHttp\Exception\GuzzleException $guzzleException) {
             throw new UnableToProcessRequestException(
-                Response::getNullResponse(),
-                $transferException->getMessage(),
-                $transferException->getCode(),
-                $transferException
+                HttpResponse::getNullResponse(),
+                $guzzleException->getMessage(),
+                $guzzleException->getCode(),
+                $guzzleException
             );
         }
     }

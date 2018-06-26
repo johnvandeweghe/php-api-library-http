@@ -7,7 +7,7 @@ require_once "ExampleLambdaController.php";
 
 $request = new \PHPAPILibrary\Http\HttpRequest(\GuzzleHttp\Psr7\ServerRequest::fromGlobals());
 
-$router = new \PHPAPILibrary\Core\Network\RegisteredPathRouter();
+$router = new \PHPAPILibrary\Core\Network\Router\RegisteredPathRouter();
 
 $router->addRoute("/", new ExampleLambdaController(function(RequestInterface $request): ResponseInterface
 {

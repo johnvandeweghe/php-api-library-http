@@ -15,6 +15,10 @@ class ExampleLambdaDataController extends \PHPAPILibrary\Core\Data\AbstractLambd
         $this->callable = $callable;
     }
 
+    public static function wrapInDefaultLayerController(callable $callable): \PHPAPILibrary\Http\In\LayerController {
+        return new \PHPAPILibrary\Http\In\LayerController(new self($callable));
+    }
+
     /**
      * @param \PHPAPILibrary\Core\Data\RequestInterface $request
      * @return callable function(RequestInterface): ResponseInterface

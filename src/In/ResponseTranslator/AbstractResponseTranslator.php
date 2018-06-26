@@ -2,14 +2,11 @@
 namespace PHPAPILibrary\Http\In\ResponseTranslator;
 
 use GuzzleHttp\Psr7\Response;
-use HansOtt\PSR7Cookies\Cookie;
-use HansOtt\PSR7Cookies\ResponseCookies;
 use HansOtt\PSR7Cookies\SetCookie;
 use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateResponseException;
 use PHPAPILibrary\Core\Network\ResponseInterface;
 use PHPAPILibrary\Core\Network\In\ResponseTranslator\DataTranslatorInterface;
 use PHPAPILibrary\Http\HttpResponse;
-use PHPAPILibrary\Http\ResponseDataInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**

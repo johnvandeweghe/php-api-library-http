@@ -1,7 +1,7 @@
 <?php
 namespace PHPAPILibrary\Http\In\ResponseTranslator;
 
-use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateRequestException;
+use PHPAPILibrary\Core\Network\In\Exception\UnableToTranslateResponseException;
 use PHPAPILibrary\Core\Network\In\ResponseTranslator\DataTranslatorInterface;
 use PHPAPILibrary\Http\Data\Response;
 use PHPAPILibrary\Http\In\ResponseTranslator\DataTranslator\JsonDataTranslator;
@@ -50,7 +50,7 @@ class ContentTypeDataTranslatorProvider
     /**
      * @param Response $response
      * @return DataTranslatorInterface
-     * @throws UnableToTranslateRequestException
+     * @throws UnableToTranslateResponseException
      */
     public function getDataTranslator(Response $response): DataTranslatorInterface
     {
