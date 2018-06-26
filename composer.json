@@ -15,11 +15,17 @@
     "require": {
         "php": "^7.1",
         "guzzlehttp/guzzle": "^6.3",
-        "johnvandeweghe/php-api-library-core": "^1.0@alpha",
+        "johnvandeweghe/php-api-library-core": "^1.0@beta",
         "hansott/psr7-cookies": "^2.0"
     },
     "autoload": {
         "psr-4": {"PHPAPILibrary\\Http\\": "src/"},
         "files": ["src/functions.php"]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:johnvandeweghe/php-api-library-core.git"
+        }
+    ]
 }
