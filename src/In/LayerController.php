@@ -6,7 +6,6 @@ use PHPAPILibrary\Core\Network\AccessController\AllowAllAccessController;
 use PHPAPILibrary\Core\Network\AccessControllerInterface;
 use PHPAPILibrary\Core\Network\CacheController\NullCacheController;
 use PHPAPILibrary\Core\Network\CacheControllerInterface;
-use PHPAPILibrary\Core\Network\In\AbstractLayerController;
 use PHPAPILibrary\Core\Network\In\RequestTranslatorInterface;
 use PHPAPILibrary\Core\Network\In\ResponseTranslatorInterface;
 use PHPAPILibrary\Core\Network\Logger\NullLogger;
