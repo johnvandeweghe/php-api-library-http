@@ -42,7 +42,7 @@ abstract class AbstractLayerController extends \PHPAPILibrary\Core\Data\Abstract
      */
     protected function getResponse(RequestInterface $request): ResponseInterface
     {
-        if(!($request instanceof RequestInterface)) {
+        if(!($request instanceof Request)) {
             throw new RequestException(new Response(new ResponseData(400)));
         }
 
@@ -50,10 +50,10 @@ abstract class AbstractLayerController extends \PHPAPILibrary\Core\Data\Abstract
     }
 
     /**
-     * @param RequestInterface $request
-     * @return ResponseInterface
+     * @param Request $request
+     * @return Response
      * @throws RequestException
      * @throws UnableToProcessRequestException
      */
-    abstract protected function getHttpDataResponse(RequestInterface $request): ResponseInterface;
+    abstract protected function getHttpDataResponse(Request $request): Response;
 }
